@@ -42,9 +42,19 @@ PhotoBooth
                 reader.readAsDataURL(file);
             }
         }); 
-        Startcamera.addEventListener('click',function() {
-            const dataURL = canvas.toDataURL('image/png');
+        Startcamera.addEventListener('click', async function() {
+                        try {
+                stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+                camera.srcObject = stream;
+                camera.onloadedmetadata = function () {
+                    canvas.width = camera.videoWidth;
+                    canvas.height = camera.videoHeight;
+                };
+            } catch (error) {
+                console.error('Error accessing camera:', error);
+            }
         });
+
         takeapicture.addEventListener('click', () => {
             canvas.width = camera.videoWidth;
             canvas.height = camera.videoHeight;
@@ -156,4 +166,4 @@ PhotoBooth
         display: none;
     }
 
-</style>
+</style> 
