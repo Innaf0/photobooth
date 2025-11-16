@@ -39,7 +39,7 @@ PhotoBooth
                 reader.onload = function () {
                     output.src = reader.result;
                 }
-                reader.readAsDataURL(file);
+            output.src = reader.readAsDataURL(file);
             }
         }); 
         Startcamera.addEventListener('click', async function() {
@@ -68,8 +68,7 @@ PhotoBooth
         });
         savephoto.addEventListener('click', () => {
             const link = document.createElement('a');
-            console.log(dataURL);
-            link.href = canvas.toDataURL('image/png');
+            link.href = output.src;
             link.download = 'photobooth-photo.png';
             link.click();
         });
